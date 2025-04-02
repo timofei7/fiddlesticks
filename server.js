@@ -41,6 +41,8 @@ app.get('/:roomId', (req, res) => {
   res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
-httpServer.listen(5000, '0.0.0.0', () => {
+const port = process.env.PORT || 9090;
+
+httpServer.listen(port, '0.0.0.0', () => {
   console.log('Server running on port 5000');
 });
