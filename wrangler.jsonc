@@ -1,0 +1,22 @@
+{
+  "$schema": "./node_modules/wrangler/config-schema.json",
+  "name": "fiddlesticks",
+  "main": "worker/index.js",
+  "compatibility_date": "2026-09-15",
+  // BrunchLabs, which holds the zingweb.com zone.
+  "account_id": "d70ea74d7cfa98480696dbe73cb87585",
+  "routes": [{ "pattern": "fiddlesticks.zingweb.com", "custom_domain": true }],
+  "assets": {
+    // Any path that isn't a built file (e.g. /abc123) gets index.html; the app reads the room from the URL.
+    "not_found_handling": "single-page-application",
+    // Only the websocket route needs the Worker; everything else is served straight from the asset cache.
+    "run_worker_first": ["/parties/*"]
+  },
+  "durable_objects": {
+    "bindings": [{ "name": "Room", "class_name": "Room" }]
+  },
+  "exports": {
+    "Room": { "type": "durable-object", "storage": "sqlite" }
+  },
+  "observability": { "enabled": true }
+}

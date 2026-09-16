@@ -1,28 +1,123 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background: #1e1e1e;
+  font-family: system-ui, sans-serif;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  color: white;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 12px;
+  padding: 10px 20px;
+  border-bottom: 1px solid #333;
+  font-size: 14px;
+}
+
+.topbar button,
+.topbar a {
+  background: #2d2d2d;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: #ccc;
+  font: inherit;
+  padding: 4px 10px;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.status {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #98c379;
+}
+
+.status.offline {
+  background: #e06c75;
+}
+
+.warning {
+  color: #e06c75;
+  font-size: 13px;
+}
+
+.handle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  margin-left: auto;
+}
+
+.swatch {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.handle input {
+  width: 160px;
+  background: #2d2d2d;
+  border: 1px solid #444;
+  border-radius: 4px;
+  color: white;
+  font: inherit;
+  padding: 4px 8px;
+}
+
+.peers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.peers li {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border-left: 4px solid;
+  border-radius: 4px;
+  background: #2d2d2d;
+  padding: 2px 8px;
+  font-size: 12px;
+}
 
 .editor {
   display: flex;
-  height: 100vh;
+  flex: 1;
+  min-height: 0;
   padding: 20px;
   gap: 20px;
-  background: #1e1e1e;
-  color: white;
 }
 
 .code-panels {
   flex: 1;
+  min-width: 0;
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
-.panel {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-}
-
+.panel,
 .preview-panel {
   flex: 1;
+  min-width: 0;
+  min-height: 0;
   display: flex;
   flex-direction: column;
 }
@@ -33,14 +128,32 @@ h2 {
   color: #ccc;
 }
 
-textarea {
+.cm-host {
   flex: 1;
-  background: #2d2d2d;
+  min-height: 0;
   border: 1px solid #444;
-  color: white;
-  padding: 10px;
-  font-family: monospace;
-  resize: none;
+}
+
+.cm-host .cm-editor {
+  height: 100%;
+}
+
+/* Room above line 1 so a remote name label there isn't clipped. */
+.cm-host .cm-content {
+  padding-top: 1.2em;
+}
+
+/* Always show remote handles, not just on hover. */
+.cm-host .cm-editor .cm-ySelectionInfo {
+  opacity: 1;
+  top: -1.3em;
+  padding: 0 4px;
+  border-radius: 3px 3px 3px 0;
+  font-family: system-ui, sans-serif;
+  font-size: 11px;
+  line-height: 1.3em;
+  color: #1e1e1e;
+  pointer-events: none;
 }
 
 iframe {
